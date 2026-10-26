@@ -1,0 +1,21 @@
+
+# .NET build files
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.tmp
+*.log
+
+# Sensitive keys
+*.pem
+*.pfx
+*.key
