@@ -19,3 +19,8 @@
 *.pem
 *.pfx
 *.key
+# AES secret key files
+aes-key.json
+# Generated AES test files
+*.aes
+test_decrypted.txt
