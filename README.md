@@ -44,7 +44,25 @@ cd AES-App
 dotnet run
 ```
 
-Nhập văn bản cần mã hóa. Chương trình sẽ hiển thị khóa, IV, bản mã và kết quả giải mã.
+Chương trình AES-App thực hiện mã hóa và giải mã dữ liệu bằng thuật toán AES-256-CBC với padding PKCS7.
+
+**Các chức năng đã triển khai:**
+
+- Mã hóa văn bản bằng AES-256.
+- Giải mã bản mã để khôi phục văn bản ban đầu.
+- Tạo khóa AES và IV ngẫu nhiên.
+- Lưu và đọc lại khóa AES, IV từ file `aes-key.json`.
+- Mã hóa nội dung file `test.txt` thành file `test.txt.aes`.
+- Giải mã file `test.txt.aes` thành file `test_decrypted.txt`.
+- So sánh nội dung file giải mã với file ban đầu để kiểm tra tính chính xác.
+
+**Kết quả kiểm thử:**
+
+Chương trình đã thực hiện mã hóa và giải mã file thành công. Nội dung file sau giải mã trùng với file ban đầu.
+
+**Lưu ý bảo mật:**
+
+File `aes-key.json` chứa khóa bí mật phục vụ thực hành và đã được cấu hình trong `.gitignore` để không đưa lên GitHub. Trong ứng dụng thực tế, khóa cần được lưu trữ bằng cơ chế quản lý bí mật an toàn, không nên lưu dưới dạng văn bản thuần.
 
 ## 5. Chạy chương trình RSA
 
@@ -78,11 +96,32 @@ Kết quả hiển thị bao gồm:
 Các giá trị thời gian được tính bằng mili giây (ms).
 ## 6. Kết quả kiểm thử
 
-Hai chương trình đã được chạy thử thành công:
+Ba ứng dụng AES-App, RSA-App và Benchmark-App đã được chạy thử thành công.
 
-- AES-256: Văn bản sau giải mã trùng với văn bản ban đầu.
-- RSA-2048: Văn bản sau giải mã trùng với văn bản ban đầu.
-- Cả hai chương trình đều hiển thị thông báo kiểm tra dữ liệu thành công.
+**1. Kiểm thử AES-256**
+
+- Mã hóa và giải mã văn bản thành công.
+- Mã hóa file `test.txt` thành `test.txt.aes`.
+- Giải mã file `test.txt.aes` thành `test_decrypted.txt`.
+- Nội dung file sau giải mã trùng với file ban đầu.
+- Chương trình hiển thị thông báo kiểm tra thành công.
+
+**2. Kiểm thử RSA-2048**
+
+- Tạo cặp khóa Public Key và Private Key.
+- Mã hóa văn bản bằng Public Key.
+- Giải mã văn bản bằng Private Key.
+- Văn bản sau giải mã trùng với văn bản ban đầu.
+
+**3. Kiểm thử Benchmark**
+
+- Chạy chương trình ở chế độ Release.
+- Thực hiện 1.000 lần lặp cho mỗi thao tác.
+- Đo thời gian trung bình của AES-256-CBC và RSA-2048-OAEP-SHA256.
+- Kiểm tra dữ liệu sau giải mã của cả hai thuật toán đều chính xác.
+- Kết quả đo chi tiết được trình bày tại mục 10.3.
+
+**Kết luận kiểm thử:** Cả ba ứng dụng đều hoạt động thành công trong các trường hợp đã kiểm tra. AES có thời gian xử lý thấp hơn RSA trong phép thử dữ liệu ngắn đã thực hiện.
 
 ## 7. Kết luận
 
